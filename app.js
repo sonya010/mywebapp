@@ -20,6 +20,14 @@ app.get('/', (req, res) => {
 
 app.use('/', routes);
 
-app.listen(config.port, () => {
-    console.log(`App mywebapp is running on port ${config.port}`);
+const serverTarget = process.env.LISTEN_FDS > 0 ? { fd: 3 } : 8000;
+
+const server = app.listen(serverTarget, () => {
+    console.log(process.env.LISTEN_FDS > 0 
+        ? 'Started via systemd socket' 
+        : 'Started on port 8000');
+});
+
+server.on('error', (err) => {
+    console.error('Server error:', err);
 });
