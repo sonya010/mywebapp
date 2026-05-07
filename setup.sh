@@ -34,7 +34,7 @@ sudo chage -d 0 operator
 # 3. Database setup
 sudo -u postgres psql -c "CREATE DATABASE $DB_NAME;"
 sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;"
+sudo -u postgres psql -c "ALTER DATABASE $DB_NAME OWNER TO $DB_USER;"
 
 # 4. Deploy Application
 sudo mkdir -p /opt/mywebapp
@@ -48,7 +48,8 @@ cd /opt/mywebapp
 sudo -u app npm install
 
 # 5. Configuration files
-cat <<EOF | sudo -u app tee /opt/mywebapp/config.json
+sudo mkdir -p /etc/mywebapp
+cat <<EOF | sudo tee /etc/mywebapp/config.json
 {
   "port": 8000,
   "db": {
@@ -60,7 +61,7 @@ cat <<EOF | sudo -u app tee /opt/mywebapp/config.json
   }
 }
 EOF
-
+sudo chown -R app:app /etc/mywebapp
 # 6. Налаштування Systemd та Nginx
 # Копіюємо конфіги з нашої папки deploy
 sudo cp /opt/mywebapp/deploy/mywebapp.service /etc/systemd/system/
