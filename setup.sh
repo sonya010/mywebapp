@@ -43,6 +43,7 @@ sudo -u app git clone $REPO_URL /tmp/mywebapp-clone
 sudo cp -r /tmp/mywebapp-clone/* /opt/mywebapp/
 sudo cp -r /tmp/mywebapp-clone/.* /opt/mywebapp/ 2>/dev/null
 sudo rm -rf /tmp/mywebapp-clone
+sudo chown -R app:app /opt/mywebapp
 cd /opt/mywebapp
 sudo -u app npm install
 
