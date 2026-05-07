@@ -87,3 +87,6 @@ operator ALL=(ALL) NOPASSWD: /usr/bin/systemctl start mywebapp.socket, /usr/bin/
 EOF
 
 echo "Setup completed successfully!"
+
+# 9. Lock default user
+usermod -L $SUDO_USER
