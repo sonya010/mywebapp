@@ -37,4 +37,17 @@
 git clone [https://github.com/Sonya010/mywebapp.git](https://github.com/Sonya010/mywebapp.git)
 cd mywebapp
 chmod +x setup.sh
-sudo ./setup.sh
+sudo ./setup.sh 
+```
+
+## 5. Запуск за допомогою Docker Compose (Лабораторна робота №2)
+
+Проєкт було повністю контейнеризовано. Для автоматичного запуску всіх трьох сервісів (PostgreSQL, Node.js App, Nginx) використовується Docker Compose.
+
+**Інструкція з запуску:**
+1. Переконайтеся, що на вашому комп'ютері встановлено Docker та Docker Compose.
+2. Склонуйте репозиторій та перейдіть у папку проєкту.
+3. Виконайте команду для запуску сервісів у фоновому режимі:
+   ```bash
+   docker-compose up -d
+   ```
